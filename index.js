@@ -31,10 +31,9 @@ function displayPCs() {
 
   for (var i = 0; i < pcData.length; i++) {
     var pc = pcData[i];
-    var pcBrand = pc.brand.toLowerCase();
     var pcModel = pc.model.toLowerCase();
 
-    if (pcModel.includes(searchInput) || pcBrand.includes(searchInput) || pc.description.toLowerCase().includes(searchInput)) {
+    if (pcModel.includes(searchInput)) {
       var pcElement = $('<div class="pc"></div>');
       var modelElement = $('<div class="model"></div>').text(pc.model);
       var priceElement = $('<div class="price"></div>').text('$' + pc.price);
@@ -47,6 +46,27 @@ function displayPCs() {
     }
   }
 }
+
+function deletePC() {
+  var modelToDelete = $('#deleteInput').val().toLowerCase();
+
+  for (var i = 0; i < pcData.length; i++) {
+    var pc = pcData[i];
+    var pcModel = pc.model.toLowerCase();
+
+    if (pcModel === modelToDelete) {
+      pcData.splice(i, 1);
+      savePCData(); 
+      displayPCs(); 
+      break; 
+    }
+  }
+  
+  $('#deleteInput').val(''); 
+}
+
+$('#searchButton').click(displayPCs);
+$('#deleteButton').click(deletePC);
 
 function addPC() {
   var brand = $('#brandInput').val();
@@ -72,6 +92,7 @@ function addPC() {
   $('#priceInput').val('');
   $('#descriptionInput').val('');
   $('#imageInput').val('');
+ 
 }
 
 
@@ -92,4 +113,4 @@ function sortPCsByPrice() {
 $('#sortPriceButton').click(sortPCsByPrice);
 
 loadPCData();
-displayPCs();
+displayPCs(pcData);
