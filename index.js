@@ -11,6 +11,17 @@ var pcData = [
   { brand: "Asus", model: "ASUS VIVOBOOK PRO 15 ", price: "550", description: "Ecran 15.6 Dalle IPS Full HD - Processeur AMD Ryzen 7-4800H,  4Go de mémoire dédiée ", image: "https://www.tunisianet.com.tn/309179-home/pc-portable-asus-vivobook-pro-15-ryzen-7-4800h-8-go.jpg" },
 ];
 
+function loadPCData() {
+  var storedData = localStorage.getItem('pcData');
+  if (storedData) {
+    pcData = JSON.parse(storedData);
+  }
+}
+
+
+function savePCData() {
+  localStorage.setItem('pcData', JSON.stringify(pcData));
+}
 
 function displayPCs() {
   var pcList = $('#pcList');
@@ -18,18 +29,12 @@ function displayPCs() {
 
   var searchInput = $('#searchInput').val().toLowerCase();
 
-
-
   for (var i = 0; i < pcData.length; i++) {
     var pc = pcData[i];
     var pcBrand = pc.brand.toLowerCase();
     var pcModel = pc.model.toLowerCase();
 
-
     if (pcModel.includes(searchInput) || pcBrand.includes(searchInput) || pc.description.toLowerCase().includes(searchInput)) {
-
-
-
       var pcElement = $('<div class="pc"></div>');
       var modelElement = $('<div class="model"></div>').text(pc.model);
       var priceElement = $('<div class="price"></div>').text('$' + pc.price);
@@ -37,46 +42,54 @@ function displayPCs() {
       var brandElement = $('<div class="brand"></div>').text(pc.brand);
       var imageElement = $('<img src="' + pc.image + '">');
 
-
       pcElement.append(imageElement, modelElement, priceElement, descriptionElement, brandElement);
-
-
       pcList.append(pcElement);
     }
   }
 }
 
+function addPC() {
+  var brand = $('#brandInput').val();
+  var model = $('#modelInput').val();
+  var price = $('#priceInput').val();
+  var description = $('#descriptionInput').val();
+  var image = $('#imageInput').val();
 
+  var newPC = {
+    brand: brand,
+    model: model,
+    price: price,
+    description: description,
+    image: image
+  };
 
+  pcData.push(newPC);
+  savePCData();
+  displayPCs();
 
-
+  $('#brandInput').val('');
+  $('#modelInput').val('');
+  $('#priceInput').val('');
+  $('#descriptionInput').val('');
+  $('#imageInput').val('');
+}
 
 
 $('#searchButton').click(displayPCs);
+$('#addButton').click(addPC);
 
-function sortPCsByModel() {
+
+
+function sortPCsByPrice() {
   pcData.sort(function(a, b) {
-    var modelA = a.model.toUpperCase();
-    var modelB = b.model.toUpperCase();
-    if (modelA < modelB) {
-      return -1;
-    }
-    if (modelA > modelB) {
-      return 1;
-    }
-    return 0;
+    return parseInt(a.price) - parseInt(b.price);
   });
   displayPCs();
 }
 
-$('#sortModelButton').click(sortPCsByModel);
+
+
+$('#sortPriceButton').click(sortPCsByPrice);
+
+loadPCData();
 displayPCs();
-
-
-
-  
- 
-
- 
-
-
