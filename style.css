@@ -1,0 +1,82 @@
+body {
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1 {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #333;
+    color: #fff;
+    margin: 0;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .pc {
+    transition: transform 0.3s ease-in-out;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  .pc:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: scale(1.02);
+  }
+  
+  .pc .model {
+    font-weight: bold;
+    margin-right: 10px;
+  
+  }
+  .pc .brand {
+    font-weight: bold;
+    margin-left: 20px;
+  
+  }
+  
+  .pc img {
+    width: 100px;
+    height: auto;
+    margin-right: 10px;
+  }
+  
+  .search-container {
+    margin-bottom: 20px;
+  }
+  
+  .search-container input[type="text"] {
+    padding: 8px;
+    width: 70%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .search-container button {
+    padding: 8px 12px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #pcList {
+    padding: 10px;
+  }
+      .pc .price {
+      color: green;
+      margin-right: 10px;
+    }
